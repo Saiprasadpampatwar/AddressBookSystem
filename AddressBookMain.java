@@ -82,7 +82,7 @@ public class AddressBookMain {
 						abook1.viewAllPerson().get(i).phoneno = sc.nextInt();
 						break;
 					case 8:
-						System.out.println("New email:");
+						System.out.println("New Email:");
 						abook1.viewAllPerson().get(i).email = sc.next();
 						break;
 					}
