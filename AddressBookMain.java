@@ -11,16 +11,16 @@ public class AddressBookMain {
 		{
 		Person p1 = new Person();
 		System.out.println("Enter First Name:");
-		p1.firstname = sc.nextLine();
+		p1.firstname = sc.next();
 		
 		System.out.println("Enter the last name: ");
-		p1.lastname = sc.nextLine();
+		p1.lastname = sc.next();
 		System.out.println("Enter the address");
-		p1.address = sc.nextLine();
+		p1.address = sc.next();
 		System.out.println("Enter the City: ");
-		p1.city = sc.nextLine();
+		p1.city = sc.next();
 		System.out.println("Enter the State: ");
-		p1.state = sc.nextLine();
+		p1.state = sc.next();
 		System.out.println("Enter the zip: ");
 		p1.zip = sc.nextInt();
 		System.out.println("Enter the mob.no: ");
@@ -37,12 +37,13 @@ public class AddressBookMain {
 		{
 		System.out.println(abook1.viewAllPerson().get(i).firstname);
 		}
-		System.out.println("Want to edit person details 1.Yes 2.No");
+		System.out.println("Choose 1.Edit\n 2.Delete");
 		int option = sc.nextInt();
+		System.out.println("Enter fname");
+		String nameofperson = sc.next();
 		switch (option) {
 		case 1: 
-			System.out.println("Enter fname");
-			String nameofperson = sc.next();
+			
 			
 			for(int i=0;i<abook1.viewAllPerson().size();i++)
 			{
@@ -89,11 +90,18 @@ public class AddressBookMain {
 			}
 			break;
 			case 2 :
+				for(int i=0;i<abook1.viewAllPerson().size();i++)
+				{
+					if(nameofperson.equalsIgnoreCase(abook1.viewAllPerson().get(i).firstname))
+					{
+						abook1.viewAllPerson().remove(i);
+					}
+				}
 				break;
 		}
-		for(int i=0;i<2;i++)
+		for(int i=0;i<abook1.viewAllPerson().size();i++)
 		{
-			System.out.println(abook1.viewAllPerson().get(i).lastname);
+			System.out.println(abook1.viewAllPerson().get(i).firstname);
 		}
 		
 }
