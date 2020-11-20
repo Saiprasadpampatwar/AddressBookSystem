@@ -7,7 +7,7 @@ public class AddressBookMain {
 		System.out.println("Welcome to Address Book Program");
 		Scanner sc = new Scanner(System.in);
 		AddressBook abook1 = new AddressBook();
-		for(int i=0;i<2;i++)
+		for(int i=0;i<abook1.viewAllPerson().size();i++)
 		{
 		Person p1 = new Person();
 		System.out.println("Enter First Name:");
@@ -33,7 +33,7 @@ public class AddressBookMain {
 		
 		abook1.addPerson(p1);
 		}
-		for(int i=0;i<2;i++)
+		for(int i=0;i<abook1.viewAllPerson().size();i++)
 		{
 		System.out.println(abook1.viewAllPerson().get(i).firstname);
 		}
