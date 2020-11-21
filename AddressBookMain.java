@@ -5,9 +5,16 @@ public class AddressBookMain {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome to Address Book Program");
+		HashMap<String, ArrayList> DifferentAddressBook= new HashMap<>();
 		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter the name of address book ");
+		String nameOfAddressBook = sc.next();
+				
+		System.out.println("How many persons do you want to enter:");
+		int noOfPerson = sc.nextInt();
 		AddressBook abook1 = new AddressBook();
-		for(int i=0;i<abook1.viewAllPerson().size();i++)
+		for(int i=0;i<noOfPerson;i++)
 		{
 		Person p1 = new Person();
 		System.out.println("Enter First Name:");
@@ -33,6 +40,7 @@ public class AddressBookMain {
 		
 		abook1.addPerson(p1);
 		}
+		DifferentAddressBook.put(nameOfAddressBook, abook1.viewAllPerson());
 		for(int i=0;i<abook1.viewAllPerson().size();i++)
 		{
 		System.out.println(abook1.viewAllPerson().get(i).firstname);
