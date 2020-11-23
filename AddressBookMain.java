@@ -129,14 +129,14 @@ public class AddressBookMain {
 				for(int i=0;i<abook1.viewAllPerson().size();i++)
 				{
 					System.out.println("Details of "+(i+1)+" Person");
-					System.out.println(abook1.viewAllPerson().get(i).firstname);
-					System.out.println(abook1.viewAllPerson().get(i).lastname);
-					System.out.println(abook1.viewAllPerson().get(i).address);
-					System.out.println(abook1.viewAllPerson().get(i).city);
-					System.out.println(abook1.viewAllPerson().get(i).state);
-					System.out.println(abook1.viewAllPerson().get(i).zip);
-					System.out.println(abook1.viewAllPerson().get(i).phoneno);
-					System.out.println(abook1.viewAllPerson().get(i).email);
+					System.out.println("First Name: "+abook1.viewAllPerson().get(i).firstname);
+					System.out.println("Last Name: "+abook1.viewAllPerson().get(i).lastname);
+					System.out.println("Address: "+abook1.viewAllPerson().get(i).address);
+					System.out.println("City: "+abook1.viewAllPerson().get(i).city);
+					System.out.println("State: "+abook1.viewAllPerson().get(i).state);
+					System.out.println("ZIP: "+abook1.viewAllPerson().get(i).zip);
+					System.out.println("Phone No: "+abook1.viewAllPerson().get(i).phoneno);
+					System.out.println("Email: "+abook1.viewAllPerson().get(i).email);
 				}
 				next = 1;
 				break;
