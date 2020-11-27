@@ -1,21 +1,62 @@
 import java.util.*;
 
 public class AddressBookMain {
-	
+	static Scanner sc = new Scanner(System.in);
 	public static boolean checkDuplicateName(String name,AddressBook abook1 ) {
-		for(int i=0;i<abook1.viewAllPerson().size();i++) {
-			if(abook1.viewAllPerson().get(i).firstname.equals(name)) {
+		for(int i=0;i<abook1.retuenAddressBook().size();i++) {
+			if(abook1.retuenAddressBook().get(i).firstname.equals(name)) {
 				return true;
 			}		
 		}
 		return false;
 	}
+	
+	public static void searchPersonByCityOrState(String city,String state,HashMap<String , AddressBook>DifferentAddressBook) {
+		for(AddressBook book:DifferentAddressBook.values()) {
+			for(int i=0;i<book.contactDetails.size();i++) {
+				if(book.contactDetails.get(i).city.equals(city) || book.contactDetails.get(i).state.equals(state)) {
+					System.out.println(book.contactDetails.get(i).firstname);
+				}
+			}
+			
+		}
+	}
+	
+	public static Person addPersons(AddressBook abook1) {
+		Person p1 = new Person();
+		System.out.println("Enter First Name:");
+		p1.firstname = sc.next();
+		boolean result = checkDuplicateName(p1.firstname,abook1);
+		while(result) {
+			System.out.println("Entered First name already exist please enter another name");
+			p1.firstname = sc.next();
+			result = checkDuplicateName(p1.firstname,abook1);
+		}
+		System.out.println("Enter the last name: ");
+		p1.lastname = sc.next();
+		System.out.println("Enter the address");
+		p1.address = sc.next();
+		System.out.println("Enter the City: ");
+		p1.city = sc.next();
+		System.out.println("Enter the State: ");
+		p1.state = sc.next();
+		System.out.println("Enter the zip: ");
+		p1.zip = sc.nextInt();
+		System.out.println("Enter the mob.no: ");
+		
+		p1.phoneno = sc.nextInt();
+		System.out.println("Enter the email: ");
+		p1.email = sc.next();
+		
+		System.out.println("Thank You");
+		return p1;
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome to Address Book Program");
-		HashMap<String, ArrayList> DifferentAddressBook= new HashMap<>();
-		AddressBook abook1 = new AddressBook();
+		HashMap<String, AddressBook> DifferentAddressBook= new HashMap<>();
+		
 		Scanner sc = new Scanner(System.in);
 		int next = 1;
 		while(next == 1)
@@ -30,41 +71,17 @@ public class AddressBookMain {
 				System.out.println("How many persons do you want to enter:");
 				int noOfPerson = sc.nextInt();
 				//AddressBook abook1 = new AddressBook();
+				AddressBook abook1 = new AddressBook();
 				for(int i=0;i<noOfPerson;i++)
 				{
-				Person p1 = new Person();
-				System.out.println("Enter First Name:");
-				p1.firstname = sc.next();
-				boolean result = checkDuplicateName(p1.firstname,abook1);
-				while(result) {
-					System.out.println("Entered First name already exist please enter another name");
-					p1.firstname = sc.next();
-					result = checkDuplicateName(p1.firstname,abook1);
+					
+					abook1.addPerson(addPersons(abook1));
+				
 				}
-				System.out.println("Enter the last name: ");
-				p1.lastname = sc.next();
-				System.out.println("Enter the address");
-				p1.address = sc.next();
-				System.out.println("Enter the City: ");
-				p1.city = sc.next();
-				System.out.println("Enter the State: ");
-				p1.state = sc.next();
-				System.out.println("Enter the zip: ");
-				p1.zip = sc.nextInt();
-				System.out.println("Enter the mob.no: ");
-				
-				p1.phoneno = sc.nextInt();
-				System.out.println("Enter the email: ");
-				p1.email = sc.next();
-				
-				System.out.println("Thank You");
-				
-				abook1.addPerson(p1);
-				}
-				DifferentAddressBook.put(nameOfAddressBook, abook1.viewAllPerson());
-				for(int i=0;i<abook1.viewAllPerson().size();i++)
+				DifferentAddressBook.put(nameOfAddressBook, abook1);
+				for(int i=0;i<abook1.retuenAddressBook().size();i++)
 				{
-				System.out.println(abook1.viewAllPerson().get(i).firstname);
+				System.out.println(abook1.retuenAddressBook().get(i).firstname);
 				}
 				int ip =1;
 				while(ip == 1)
@@ -77,9 +94,9 @@ public class AddressBookMain {
 					System.out.println("Enter fname");
 					nameofperson = sc.next();
 					
-					for(int i=0;i<abook1.viewAllPerson().size();i++)
+					for(int i=0;i<abook1.retuenAddressBook().size();i++)
 					{
-						if(nameofperson.equalsIgnoreCase(abook1.viewAllPerson().get(i).firstname))
+						if(nameofperson.equalsIgnoreCase(abook1.retuenAddressBook().get(i).firstname))
 						{
 							System.out.println("Which detail you want to change\n 1.First Name\n 2.Last Name\n"
 									+ "3.Address\n 4. City\n 5.State \n 6. zip \n 7. phone no\n 8.email");
@@ -87,35 +104,35 @@ public class AddressBookMain {
 							switch(choose) {
 							case 1:
 								System.out.println("New First Name:");
-								abook1.viewAllPerson().get(i).firstname = sc.next();
+								abook1.retuenAddressBook().get(i).firstname = sc.next();
 								break;
 							case 2:
 								System.out.println("New Last Name:");
-								abook1.viewAllPerson().get(i).lastname = sc.next();
+								abook1.retuenAddressBook().get(i).lastname = sc.next();
 								break;
 							case 3:
 								System.out.println("New Address:");
-								abook1.viewAllPerson().get(i).address = sc.next();
+								abook1.retuenAddressBook().get(i).address = sc.next();
 								break;
 							case 4:
 								System.out.println("New City:");
-								abook1.viewAllPerson().get(i).city = sc.next();
+								abook1.retuenAddressBook().get(i).city = sc.next();
 								break;
 							case 5:
 								System.out.println("New State:");
-								abook1.viewAllPerson().get(i).state = sc.next();
+								abook1.retuenAddressBook().get(i).state = sc.next();
 								break;
 							case 6:
 								System.out.println("New zip:");
-								abook1.viewAllPerson().get(i).zip = sc.nextInt();
+								abook1.retuenAddressBook().get(i).zip = sc.nextInt();
 								break;
 							case 7:
 								System.out.println("New phone no:");
-								abook1.viewAllPerson().get(i).phoneno = sc.nextInt();
+								abook1.retuenAddressBook().get(i).phoneno = sc.nextInt();
 								break;
 							case 8:
 								System.out.println("New Email:");
-								abook1.viewAllPerson().get(i).email = sc.next();
+								abook1.retuenAddressBook().get(i).email = sc.next();
 								break;
 							}
 						}
@@ -125,11 +142,11 @@ public class AddressBookMain {
 					case 2 :
 						System.out.println("Enter fname");
 						nameofperson = sc.next();
-						for(int i=0;i<abook1.viewAllPerson().size();i++)
+						for(int i=0;i<abook1.retuenAddressBook().size();i++)
 						{
-							if(nameofperson.equalsIgnoreCase(abook1.viewAllPerson().get(i).firstname))
+							if(nameofperson.equalsIgnoreCase(abook1.retuenAddressBook().get(i).firstname))
 							{
-								abook1.viewAllPerson().remove(i);
+								abook1.retuenAddressBook().remove(i);
 							}
 						}
 						ip = 1;
@@ -141,17 +158,17 @@ public class AddressBookMain {
 					
 				}
 				}
-				for(int i=0;i<abook1.viewAllPerson().size();i++)
+				for(int i=0;i<abook1.retuenAddressBook().size();i++)
 				{
 					System.out.println("Details of "+(i+1)+" Person");
-					System.out.println("First Name: "+abook1.viewAllPerson().get(i).firstname);
-					System.out.println("Last Name: "+abook1.viewAllPerson().get(i).lastname);
-					System.out.println("Address: "+abook1.viewAllPerson().get(i).address);
-					System.out.println("City: "+abook1.viewAllPerson().get(i).city);
-					System.out.println("State: "+abook1.viewAllPerson().get(i).state);
-					System.out.println("ZIP: "+abook1.viewAllPerson().get(i).zip);
-					System.out.println("Phone No: "+abook1.viewAllPerson().get(i).phoneno);
-					System.out.println("Email: "+abook1.viewAllPerson().get(i).email);
+					System.out.println("First Name: "+abook1.retuenAddressBook().get(i).firstname);
+					System.out.println("Last Name: "+abook1.retuenAddressBook().get(i).lastname);
+					System.out.println("Address: "+abook1.retuenAddressBook().get(i).address);
+					System.out.println("City: "+abook1.retuenAddressBook().get(i).city);
+					System.out.println("State: "+abook1.retuenAddressBook().get(i).state);
+					System.out.println("ZIP: "+abook1.retuenAddressBook().get(i).zip);
+					System.out.println("Phone No: "+abook1.retuenAddressBook().get(i).phoneno);
+					System.out.println("Email: "+abook1.retuenAddressBook().get(i).email);
 				}
 				next = 1;
 				break;
@@ -162,7 +179,12 @@ public class AddressBookMain {
 				break;
 			}
 		}
-
+		System.out.println("Which city you want to find out:");
+		String cityName = sc.next();
+		System.out.println("Which state you want to find out:");
+		String stateName = sc.next();
+		searchPersonByCityOrState(cityName,stateName, DifferentAddressBook);
+		
 		
 }
 	
@@ -185,7 +207,7 @@ public class AddressBookMain {
 		 contactDetails.add(pobj);
 	 }
 	 
-	 public ArrayList<Person> viewAllPerson(){
+	 public ArrayList<Person> retuenAddressBook(){
 		 return contactDetails;
 	 }
  }
