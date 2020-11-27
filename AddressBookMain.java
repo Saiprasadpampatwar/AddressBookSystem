@@ -22,6 +22,28 @@ public class AddressBookMain {
 		}
 	}
 	
+	public static HashMap<String, String> dictionaryCityVsPerson(HashMap<String , AddressBook>DifferentAddressBook) {
+		HashMap<String, String> dictionaryCityAndPerson = new HashMap<>();
+		for(AddressBook book:DifferentAddressBook.values()) {
+			for(int i=0;i<book.contactDetails.size();i++) {
+				dictionaryCityAndPerson.put(book.contactDetails.get(i).firstname, book.contactDetails.get(i).city);
+			}
+			
+		}
+		return dictionaryCityAndPerson;
+	}
+	
+	public static HashMap<String, String> dictionaryStateVsPerson(HashMap<String , AddressBook>DifferentAddressBook) {
+		HashMap<String, String> dictionaryStateAndPerson = new HashMap<>();
+		for(AddressBook book:DifferentAddressBook.values()) {
+			for(int i=0;i<book.contactDetails.size();i++) {
+				dictionaryStateAndPerson.put(book.contactDetails.get(i).firstname, book.contactDetails.get(i).state);
+			}
+			
+		}
+		return dictionaryStateAndPerson;
+	}
+	
 	public static Person addPersons(AddressBook abook1) {
 		Person p1 = new Person();
 		System.out.println("Enter First Name:");
@@ -184,7 +206,14 @@ public class AddressBookMain {
 		System.out.println("Which state you want to find out:");
 		String stateName = sc.next();
 		searchPersonByCityOrState(cityName,stateName, DifferentAddressBook);
-		
+		HashMap<String, String> cityPerson = dictionaryCityVsPerson(DifferentAddressBook);
+		for(Map.Entry m:cityPerson.entrySet()) {
+			System.out.println(m.getKey()+" : "+m.getValue());
+		}
+		HashMap<String, String> statePerson = dictionaryStateVsPerson(DifferentAddressBook);
+		for(Map.Entry m:statePerson.entrySet()) {
+			System.out.println(m.getKey()+" : "+m.getValue());
+		}
 		
 }
 	
