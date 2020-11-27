@@ -11,10 +11,21 @@ public class AddressBookMain {
 		return false;
 	}
 	
-	public static void searchPersonByCityOrState(String city,String state,HashMap<String , AddressBook>DifferentAddressBook) {
+	public static void searchPersonByCity(String city,HashMap<String , AddressBook>DifferentAddressBook) {
 		for(AddressBook book:DifferentAddressBook.values()) {
 			for(int i=0;i<book.contactDetails.size();i++) {
-				if(book.contactDetails.get(i).city.equals(city) || book.contactDetails.get(i).state.equals(state)) {
+				if(book.contactDetails.get(i).city.equals(city)) {
+					System.out.println(book.contactDetails.get(i).firstname);
+				}
+			}
+			
+		}
+	}
+	
+	public static void searchPersonByState(String state,HashMap<String , AddressBook>DifferentAddressBook) {
+		for(AddressBook book:DifferentAddressBook.values()) {
+			for(int i=0;i<book.contactDetails.size();i++) {
+				if(book.contactDetails.get(i).state.equals(state)) {
 					System.out.println(book.contactDetails.get(i).firstname);
 				}
 			}
@@ -44,6 +55,32 @@ public class AddressBookMain {
 		return dictionaryStateAndPerson;
 	}
 	
+	public static int getCountByCity(String city,HashMap<String , AddressBook>DifferentAddressBook) {
+		int count = 0;
+		for(AddressBook book:DifferentAddressBook.values()) {
+			for(int i=0;i<book.contactDetails.size();i++) {
+				if(book.contactDetails.get(i).city.equals(city)) {
+					count+=1;
+				}
+			}
+			
+		}
+		return count;
+	}
+	
+	
+	public static int getCountByState(String state,HashMap<String , AddressBook>DifferentAddressBook) {
+		int count = 0;
+		for(AddressBook book:DifferentAddressBook.values()) {
+			for(int i=0;i<book.contactDetails.size();i++) {
+				if(book.contactDetails.get(i).state.equals(state)) {
+					count+=1;
+				}
+			}
+			
+		}
+		return count;
+	}
 	public static Person addPersons(AddressBook abook1) {
 		Person p1 = new Person();
 		System.out.println("Enter First Name:");
@@ -201,19 +238,59 @@ public class AddressBookMain {
 				break;
 			}
 		}
-		System.out.println("Which city you want to find out:");
-		String cityName = sc.next();
-		System.out.println("Which state you want to find out:");
-		String stateName = sc.next();
-		searchPersonByCityOrState(cityName,stateName, DifferentAddressBook);
-		HashMap<String, String> cityPerson = dictionaryCityVsPerson(DifferentAddressBook);
-		for(Map.Entry m:cityPerson.entrySet()) {
-			System.out.println(m.getKey()+" : "+m.getValue());
+		boolean nextOption = true;
+		while(nextOption) {
+			System.out.println("Select 1. search a person by city\n 2.search a person by state\n 3. view person and cities\n 4. view person and states\n 5.find head count in city\n. 6.find head count in state\n 7.Exit");
+			int option = sc.nextInt();
+			switch(option) {
+			case 1:
+				System.out.println("Enter name of city:");
+				String cityName = sc.next();
+				searchPersonByCity(cityName, DifferentAddressBook);
+				nextOption = true;
+				break;
+			case 2:
+				System.out.println("Enter name of the state:");
+				String stateName = sc.next();
+				searchPersonByState(stateName, DifferentAddressBook);
+				nextOption = true;
+				break;
+			case 3:
+				HashMap<String, String> cityPerson = dictionaryCityVsPerson(DifferentAddressBook);
+				for(Map.Entry m:cityPerson.entrySet()) {
+					System.out.println(m.getKey()+" : "+m.getValue());
+				}
+				nextOption = true;
+				break;
+			case 4:
+				HashMap<String, String> statePerson = dictionaryStateVsPerson(DifferentAddressBook);
+				for(Map.Entry m:statePerson.entrySet()) {
+					System.out.println(m.getKey()+" : "+m.getValue());
+				}
+				nextOption = true;
+				break;
+			case 5:
+				System.out.println("Enter name of city:");
+				String city_Name = sc.next();
+				int headCountCity = getCountByCity(city_Name, DifferentAddressBook);
+				System.out.println("Head count in "+city_Name+" is "+headCountCity);
+				nextOption = true;
+				break;
+			case 6:
+				System.out.println("Enter name of the state:");
+				String state_Name = sc.next();
+				int headCountState = getCountByState(state_Name, DifferentAddressBook);
+				System.out.println("Head count in "+state_Name+" is "+headCountState);
+				nextOption = true;
+				break;
+			case 7:
+				System.out.println("ThankYou!!!");
+				nextOption = false;
+				break;
+			}
 		}
-		HashMap<String, String> statePerson = dictionaryStateVsPerson(DifferentAddressBook);
-		for(Map.Entry m:statePerson.entrySet()) {
-			System.out.println(m.getKey()+" : "+m.getValue());
-		}
+		
+		
 		
 }
 	
