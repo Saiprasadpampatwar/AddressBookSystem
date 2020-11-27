@@ -1,11 +1,21 @@
 import java.util.*;
 
 public class AddressBookMain {
+	
+	public static boolean checkDuplicateName(String name,AddressBook abook1 ) {
+		for(int i=0;i<abook1.viewAllPerson().size();i++) {
+			if(abook1.viewAllPerson().get(i).firstname.equals(name)) {
+				return true;
+			}		
+		}
+		return false;
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome to Address Book Program");
 		HashMap<String, ArrayList> DifferentAddressBook= new HashMap<>();
+		AddressBook abook1 = new AddressBook();
 		Scanner sc = new Scanner(System.in);
 		int next = 1;
 		while(next == 1)
@@ -19,13 +29,18 @@ public class AddressBookMain {
 						
 				System.out.println("How many persons do you want to enter:");
 				int noOfPerson = sc.nextInt();
-				AddressBook abook1 = new AddressBook();
+				//AddressBook abook1 = new AddressBook();
 				for(int i=0;i<noOfPerson;i++)
 				{
 				Person p1 = new Person();
 				System.out.println("Enter First Name:");
 				p1.firstname = sc.next();
-				
+				boolean result = checkDuplicateName(p1.firstname,abook1);
+				while(result) {
+					System.out.println("Entered First name already exist please enter another name");
+					p1.firstname = sc.next();
+					result = checkDuplicateName(p1.firstname,abook1);
+				}
 				System.out.println("Enter the last name: ");
 				p1.lastname = sc.next();
 				System.out.println("Enter the address");
